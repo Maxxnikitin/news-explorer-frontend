@@ -1,20 +1,15 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
-import Main from '../Main/Main';
-import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+// import { Route, Switch } from 'react-router-dom';
+// import Main from '../Main/Main';
+// import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+import Header from '../Header/Header';
 
 function App() {
   return (
     <div className="page">
-      <Switch>
-        <Route exact path='/'>
-          <Main />
-        </Route>
-        <Route path='/saved-news'>
-          <SavedNewsHeader />
-        </Route>
-      </Switch>
+      <Header />
+
     </div>
   );
 }

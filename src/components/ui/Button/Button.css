@@ -1,0 +1,26 @@
+.button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid #1A1B22;
+  box-sizing: border-box;
+  border-radius: 100px;
+  background-color: rgba(0, 0, 0, 0);
+  height: 48px;
+  padding: 0 18px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1A1B22;
+}
+
+.button__icon {
+  background-image: url('../../../images/button/logout-black.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px 24px;
+  width: 24px;
+  height: 24px;
+}
