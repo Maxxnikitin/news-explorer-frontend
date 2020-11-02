@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-// import Main from '../Main/Main';
+import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -11,8 +11,11 @@ function App() {
     <div className="page">
       <Header />
       <Switch>
-        <Route to='/saved-news'>
+        <Route path='/saved-news'>
           <SavedNews />
+        </Route>
+        <Route path='/'>
+          <Main />
         </Route>
       </Switch>
       <Footer />

@@ -3,6 +3,20 @@
   max-width: 400px;
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
+  background-color: #fff;
+}
+
+.card__img {
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+}
+
+.card__container {
+  display: flex;
+  flex-direction: column;
+  margin: 24px;
+  height: 254px;
 }
 
 .card__date {
@@ -11,6 +25,7 @@
   font-size: 18px;
   line-height: 24px;
   color: #B6BCBF;
+  margin: 0;
 }
 
 .card__title {
@@ -19,6 +34,7 @@
   font-size: 26px;
   line-height: 30px;
   color: #1A1B22;
+  margin: 12px 0 16px;
 }
 
 .card__text {
@@ -27,6 +43,8 @@
   font-size: 16px;
   line-height: 22px;
   color: #1A1B22;
+  margin: 0 0 10px;
+
 }
 
 .card__source {
@@ -37,4 +55,6 @@
   letter-spacing: 0.4px;
   text-transform: uppercase;
   color: #B6BCBF;
+  margin: 0;
+  margin-top: auto;
 }
