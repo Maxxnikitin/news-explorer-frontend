@@ -1,0 +1,34 @@
+.saved-news-header {
+  padding: 40px 0 56px;
+}
+
+.saved-news-header__about {
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(26, 27, 34, 0.5);
+}
+
+.saved-news-header__title {
+  margin: 28px 0 30px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 46px;
+  color: #1A1B22;
+}
+
+.saved-news-header__keywords {
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1A1B22;
+}
+
+.saved-news-header__keywords_bold {
+  font-weight: bold;
+}
