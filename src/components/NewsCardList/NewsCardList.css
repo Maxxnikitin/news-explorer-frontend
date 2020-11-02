@@ -1,0 +1,7 @@
+.news-card-list {
+  background-color: #F5F6F7;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 62px 104px;
+}
