@@ -1,7 +1,7 @@
-.nav-link {
+.nav__link {
   text-decoration: none;
   color: black;
-  padding-right: 34px;
+  margin-right: 34px;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -9,8 +9,13 @@
   color: #1A1B22;
 }
 
-.nav-link__logo {
+.nav__link_logo {
   font-weight: bold;
   font-size: 20px;
   line-height: 24px;
+}
+
+.nav__link_active {
+  padding: 27px 0;
+  border-bottom: 3px solid #1A1B22;
 }
