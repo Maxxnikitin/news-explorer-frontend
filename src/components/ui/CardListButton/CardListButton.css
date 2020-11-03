@@ -16,4 +16,9 @@
   font-size: 18px;
   line-height: 24px;
   color: #1A1B22;
+  transition: opacity .5s;
+}
+
+.card-list-button:hover {
+  opacity: .9;
 }

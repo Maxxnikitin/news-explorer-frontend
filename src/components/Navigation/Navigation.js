@@ -3,12 +3,15 @@ import './Navigation.css';
 import NavLinkButton from '../ui/NavLinkButton/NavLinkButton';
 import Button from '../ui/Button/Button';
 
-function Navigation() {
+function Navigation(props) {
+  const navLinkClassName = (
+    `${(props.theme === 'white') ? 'nav__link nav__link_theme_white' : 'nav__link'}`
+  );
   return (
     <nav className='nav'>
-      <NavLinkButton class='nav__link' activeClass='nav__link_active' to='/' text='Главная' />
-      <NavLinkButton class='nav__link' activeClass='nav__link_active' to='/saved-news' text='Сохранённые статьи' />
-      <Button type='button' text='Максим' />
+      <NavLinkButton theme={props.theme} class={navLinkClassName} activeClass={props.activeClass} to='/' text='Главная' />
+      <NavLinkButton theme={props.theme} class={navLinkClassName} activeClass={props.activeClass} to='/saved-news' text='Сохранённые статьи' />
+      <Button theme={props.theme} type='button' text='Максим' />
     </nav>
   )
 }

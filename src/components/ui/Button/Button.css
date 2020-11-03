@@ -16,11 +16,11 @@
   color: #1A1B22;
 }
 
+.button_theme_white {
+  border: 1px solid #fff;
+  color: #fff;
+}
+
 .button__icon {
-  background-image: url('../../../images/button/logout-black.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 24px 24px;
-  width: 24px;
-  height: 24px;
+  margin-left: 10px;
 }

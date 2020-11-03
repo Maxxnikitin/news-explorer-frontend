@@ -9,6 +9,10 @@
   color: #1A1B22;
 }
 
+.nav__link_theme_white {
+  color: #fff;
+}
+
 .nav__link_logo {
   font-weight: bold;
   font-size: 20px;
@@ -18,4 +22,9 @@
 .nav__link_active {
   padding: 27px 0;
   border-bottom: 3px solid #1A1B22;
+}
+
+.nav__link_active-white {
+  padding: 27px 0;
+  border-bottom: 3px solid #fff;
 }
