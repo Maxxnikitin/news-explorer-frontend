@@ -8,7 +8,7 @@ import Footer from '../Footer/Footer';
 
 function App() {
   return (
-    <div className="page">
+    <div className='page'>
       <Header />
       <Switch>
         <Route path='/saved-news'>
