@@ -1,7 +1,19 @@
 .news-card-list {
   background-color: #F5F6F7;
+  padding: 62px 104px;
+  outline: 1px solid red;
+}
+
+.news-card-list__container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  padding: 62px 104px;
+}
+
+.news-card-list__title {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  color: #1A1B22;
+  margin: 18px 0 64px;
 }
