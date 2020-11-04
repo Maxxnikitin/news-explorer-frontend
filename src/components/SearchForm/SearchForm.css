@@ -9,7 +9,7 @@
   align-items: center;
   position: relative;
   top: -80px;
-  z-index: -1;
+
   margin-bottom: -80px;
 }
 
@@ -32,4 +32,9 @@
   color: #FFF;
   margin: 32px auto 64px;
   max-width: 545px;
+}
+
+.search-form__form {
+  display: flex;
+  padding-left: 50px;
 }

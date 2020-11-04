@@ -13,7 +13,7 @@ function Main() {
       <Header theme='white' activeClass='nav__link_active-white' />
       <SearchForm />
       <Preloader />
-      <NewsCardList title='Результаты поиска' />
+      <NewsCardList page='main' />
       <NotFoundCard />
       <About />
     </main>
