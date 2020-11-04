@@ -6,6 +6,7 @@ import Preloader from '../Preloader/Preloader';
 import NotFoundCard from '../NotFoundCard/NotFoundCard';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import About from '../About/About';
+import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
 function Main() {
   return (
@@ -16,6 +17,7 @@ function Main() {
       <NewsCardList page='main' />
       <NotFoundCard />
       <About />
+      <PopupWithForm isOpen='true' buttonText='Войти' />
     </main>
   );
 }
