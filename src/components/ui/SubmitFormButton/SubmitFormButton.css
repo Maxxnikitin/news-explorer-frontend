@@ -18,3 +18,11 @@
   color: #FFF;
   align-self: center;
 }
+
+.submit-button:hover {
+  background-color: #347EFF;
+}
+
+.submit-button:active {
+  background-color: #2A65CC;
+}

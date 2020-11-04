@@ -17,7 +17,7 @@ function PopupWithForm(props) {
       >
         <CloseFormButton onClick={props.onClose} />
         <fieldset className="form__fieldset">
-          <legend className={`form__title form__title_place_${props.name}`}>{props.title}</legend>
+          <legend className='form__title'>{props.title}</legend>
           {props.children}
         </fieldset>
         <SubmitFormButton onClick={props.onSubmit} text={props.buttonText} />
