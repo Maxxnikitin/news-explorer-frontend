@@ -12,3 +12,7 @@
   color: #1A1B22;
   outline: none;
 }
+
+.search-input:focus {
+  background-color: #ddd;
+}

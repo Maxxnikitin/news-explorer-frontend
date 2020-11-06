@@ -1,7 +1,9 @@
 .popup {
+  position: relative;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.7s, visibility 0s linear 0.3s;
+  z-index: 2;
 }
 
 .popup__overlay {
@@ -21,8 +23,7 @@
 }
 
 .form {
-  width: 430px;
-  height: 380px;
+  width: 358px;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -33,14 +34,23 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding: 34px 36px 28px;
 }
 
 .form__fieldset {
-  position: relative;
   padding: 0;
   border: none;
-  max-width: 356px;
-  margin: -6px auto 8px;
+  max-width: 358px;
+  margin: -40px auto 8px;
+}
+
+.form__label {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #2F71E5;
 }
 
 .form__title {
@@ -51,4 +61,41 @@
   color: #1A1B22;
   padding: 0;
   margin-bottom: 22px;
+}
+
+.form__text {
+  margin: 16px auto 0;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #000;
+}
+
+.form__nav-link {
+  text-decoration: none;
+  color: #2F71E5;
+  transition: opacity .5s;
+}
+
+.form__nav-link:hover {
+  opacity: .8;
+}
+
+.form__input-error {
+  position: absolute;
+  left: 36px;
+  color: #ff0000;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.form__input-error_place_email {
+  top: 140px;
+}
+
+.form__input-error_place_password {
+  top: 223px;
 }

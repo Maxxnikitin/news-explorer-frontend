@@ -4,10 +4,10 @@ import Header from '../Header/Header';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import NewsCardList from '../NewsCardList/NewsCardList';
 
-function SavedNews() {
+function SavedNews(props) {
   return (
     <main className='saved-news'>
-      <Header activeClass='nav__link_active' />
+      <Header activeClass='nav__link_active' onClick={props.onClick} />
       <SavedNewsHeader />
       <NewsCardList />
     </main>

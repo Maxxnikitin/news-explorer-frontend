@@ -11,7 +11,7 @@ function Header(props) {
     <header className='header'>
       <div className='header__container'>
         <NavLinkButton class={navLinkClassName} to='/' text='News Explorer' />
-        <Navigation theme={props.theme} activeClass={props.activeClass} />
+        <Navigation theme={props.theme} activeClass={props.activeClass} onClick={props.onClick} />
       </div>
     </header>
   );

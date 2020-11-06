@@ -9,7 +9,12 @@
   height: 40px;
   border: none;
   position: relative;
-  top: -47px;
-  right: -47px;
+  top: -82px;
+  right: -82px;
   align-self: flex-end;
+  transition: opacity .5s;
+}
+
+.button-close-item:hover {
+  opacity: .8;
 }
