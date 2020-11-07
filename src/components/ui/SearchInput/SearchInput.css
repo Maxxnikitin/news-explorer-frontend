@@ -16,3 +16,23 @@
 .search-input:focus {
   background-color: #ddd;
 }
+
+@media (max-width: 800px) {
+  .search-input {
+    width: 340px;
+    height: 56px;
+  }
+}
+
+@media (max-width: 540px) {
+  .search-input{
+    width: calc(100% - 100px);
+  }
+}
+
+@media (max-width: 450px) {
+  .search-input {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+}

@@ -28,3 +28,10 @@
   padding: 27px 0;
   border-bottom: 3px solid #fff;
 }
+
+
+@media (max-width: 450px) {
+  .nav__link_logo {
+    font-size: 16px;
+  }
+}

@@ -15,7 +15,7 @@ function PopupWithForm(props) {
         method="post"
         action="#"
         onSubmit={props.onSubmit}
-        novalidate
+        noValidate
       >
         <CloseFormButton onClick={props.onClose} />
         <fieldset className="form__fieldset">
