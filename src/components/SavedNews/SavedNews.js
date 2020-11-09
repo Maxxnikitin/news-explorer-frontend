@@ -9,7 +9,7 @@ function SavedNews(props) {
     <main className='saved-news'>
       <Header activeClass='nav__link_active' onClick={props.onClick} />
       <SavedNewsHeader />
-      <NewsCardList />
+      <NewsCardList tooltip='Убрать из сохранённых' />
     </main>
   );
 }

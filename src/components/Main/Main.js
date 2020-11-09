@@ -13,7 +13,7 @@ function Main(props) {
       <Header theme='white' activeClass='nav__link_active-white' onClick={props.onClick} />
       <SearchForm />
       <Preloader />
-      <NewsCardList page='main' />
+      <NewsCardList page='main' tooltip='Войдите, чтобы сохранять статьи' />
       <NotFoundCard />
       <About />
     </main>
