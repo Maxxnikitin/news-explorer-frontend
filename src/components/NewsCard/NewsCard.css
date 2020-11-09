@@ -131,6 +131,10 @@
     max-width: 288px;
     max-height: 440px;
   }
+
+  .card__title {
+    -webkit-line-clamp: 2;
+  }
 }
 
 @media (max-width: 500px) {

@@ -22,3 +22,18 @@
 .card-list-button:hover {
   opacity: .9;
 }
+
+@media (max-width: 800px) {
+  .card-list-button {
+    width: 240px;
+    height: 56px;
+    margin-top: 22px;
+  }
+}
+
+@media (max-width: 500px) {
+  .card-list-button {
+    width: 288px;
+    margin-top: 15px;
+  }
+}
