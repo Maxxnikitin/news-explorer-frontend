@@ -11,6 +11,9 @@ function CreateUserPopup(props) {
       place='reg'
       buttonText='Зарегистрироваться'
       title='Регистрация'
+      onClickReg={props.onClickReg}
+      onSubmit={props.onSubmit}
+      name='registration'
     >
       <label className='form__label'>Email<FormInput type='email' name='email' placeholder='Введите почту' /></label>
       <label className='form__label'>Пароль<FormInput type='password' name='password' placeholder='Введите пароль' /></label>

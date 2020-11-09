@@ -12,6 +12,7 @@ function LoginPopup(props) {
       buttonText='Войти'
       title='Вход'
       name='login'
+      onClickLogin={props.onClickLogin}
     >
       <label className='form__label'>Email
         <FormInput type='email' name='email' placeholder='Введите почту' />

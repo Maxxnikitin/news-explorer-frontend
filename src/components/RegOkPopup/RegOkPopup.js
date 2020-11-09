@@ -9,6 +9,8 @@ function RegOkPopup(props) {
       onClose={props.onClose}
       place='result'
       title='Пользователь успешно зарегистрирован!'
+      onClickReg={props.onClickReg}
+      name='reg-ok'
     />
   );
 }

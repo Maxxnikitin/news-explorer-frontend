@@ -26,3 +26,9 @@
 .submit-button:active {
   background-color: #2A65CC;
 }
+
+@media (max-width: 434px) {
+  .submit-button {
+    width: 288px;
+  }
+}

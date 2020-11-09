@@ -2,7 +2,6 @@ import React from 'react';
 import './PopupWithForm.css';
 import CloseFormButton from '../ui/CloseFormButton/CloseFormButton';
 import SubmitFormButton from '../ui/SubmitFormButton/SubmitFormButton';
-import NavLinkButton from '../ui/NavLinkButton/NavLinkButton';
 
 function PopupWithForm(props) {
   return (
@@ -22,8 +21,16 @@ function PopupWithForm(props) {
           <legend className='form__title'>{props.title}</legend>
           {props.children}
         </fieldset>
-        {(props.place !== 'result') ? <SubmitFormButton onClick={props.onSubmit} text={props.buttonText} /> : ''}
-        {(props.place !== 'result') ? <p className='form__text'>Или {(props.place === 'login') ? <NavLinkButton class='form__nav-link' text='Зарегистрироваться' to='/signup' /> : (props.place === 'reg') ? <NavLinkButton class='form__nav-link' text='Войти' to='/signin' /> : ''}</p> : <NavLinkButton class='form__nav-link' text='Войти' to='/signin' />}
+        {(props.place !== 'result') ?
+        <SubmitFormButton onClick={props.onSubmit} text={props.buttonText} /> :
+        ''}
+        {(props.place !== 'result') ?
+        <p className='form__text'>Или {(props.place === 'login') ?
+        <button className='form__nav-link' type='button' onClick={props.onClickLogin}>Зарегистрироваться</button> :
+        (props.place === 'reg') ?
+        <button className='form__nav-link' type='button' onClick={props.onClickReg}>Войти</button> :
+        ''}</p> :
+        <button className='form__nav-link' type='button' onClick={props.onClickReg}>Войти</button>}
       </form>
     </section>
   )

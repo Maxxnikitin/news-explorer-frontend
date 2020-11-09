@@ -75,9 +75,17 @@
 }
 
 .form__nav-link {
-  text-decoration: none;
+  border: none;
+  background-color: #fff;
   color: #2F71E5;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
   transition: opacity .5s;
+  cursor: pointer;
+  outline: none;
 }
 
 .form__nav-link:hover {
@@ -98,4 +106,25 @@
 
 .form__input-error_place_password {
   top: 223px;
+}
+
+@media (max-width: 800px) {
+  .form__fieldset {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 434px) {
+  .form {
+    width: 286px;
+    height: 85%;
+    padding: 16px 17px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -42%)
+  }
+  .form__fieldset {
+    margin-top: -24px;
+    margin-bottom: 0;
+  }
 }

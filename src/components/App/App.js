@@ -13,7 +13,7 @@ function App() {
   const [isCreateUserPopupOpen, setIsCreateUserPopupOpen] = React.useState(false);
   const [isRegOkPopupOpen, setIsRegOkPopupOpen] = React.useState(false);
 
-  const overlay = document.querySelector('.popup__overlay');
+  // const overlay = document.querySelector('.popup__overlay');
 
   function closeAllPopups() {
     setIsLoginPopupOpen(false);
@@ -29,28 +29,31 @@ function App() {
   }
 
   function handleLoginClick() {
+    closeAllPopups();
     setIsLoginPopupOpen(true);
     setEventListeners();
   }
 
   function handleCreateUserClick() {
+    closeAllPopups();
     setIsCreateUserPopupOpen(true);
     setEventListeners();
   }
 
   function handleRegOkClick() {
+    closeAllPopups();
     setIsRegOkPopupOpen(true);
     setEventListeners();
   }
 
   function setEventListeners() {
     window.addEventListener('keydown', closeByEsc);
-    overlay.addEventListener('click', closeAllPopups);
+    // overlay.addEventListener('click', closeAllPopups);
   }
 
   function remEventListeners() {
     window.removeEventListener('keydown', closeByEsc);
-    overlay.removeEventListener('click', closeAllPopups);
+    // overlay.removeEventListener('click', closeAllPopups);
   }
 
   return (
@@ -67,6 +70,18 @@ function App() {
       <LoginPopup
         isOpen={isLoginPopupOpen}
         onClose={closeAllPopups}
+        onClickLogin={handleCreateUserClick}
+      />
+      <CreateUserPopup
+        isOpen={isCreateUserPopupOpen}
+        onClose={closeAllPopups}
+        onClickReg={handleLoginClick}
+        onSubmit={handleRegOkClick}
+      />
+      <RegOkPopup
+        isOpen={isRegOkPopupOpen}
+        onClose={closeAllPopups}
+        onClickReg={handleLoginClick}
       />
     </div>
   );

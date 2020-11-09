@@ -18,3 +18,19 @@
 .button-close-item:hover {
   opacity: .8;
 }
+
+@media (max-width: 800px) {
+  .button-close-item {
+    display: none;
+  }
+}
+
+@media (max-width: 434px) {
+  .button-close-item {
+    display: block;
+    top: -60px;
+    right: 0;
+    width: 24px;
+    height: 24px;
+  }
+}
