@@ -14,7 +14,7 @@ function Navigation(props) {
   );
 
   return (
-    <nav className='nav'>
+    <nav className={`${(props.place === 'mobile') ? 'nav nav-mobile' : 'nav'}`}>
       <NavLinkButton theme={props.theme} class={navLinkClassName} activeClass={props.activeClass} to='/' text='Главная' />
       <NavLinkButton theme={props.theme} class={navLinkClassName} activeClass={props.activeClass} to='/saved-news' text='Сохранённые статьи' />
       {(props.isLogged === true) ?

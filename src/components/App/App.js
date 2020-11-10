@@ -12,6 +12,7 @@ function App() {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isCreateUserPopupOpen, setIsCreateUserPopupOpen] = React.useState(false);
   const [isRegOkPopupOpen, setIsRegOkPopupOpen] = React.useState(false);
+  const [isMobileMenuPopupOpen, setIsMobileMenuPopupOpen] = React.useState(false);
 
   // const overlay = document.querySelector('.popup__overlay');
 
@@ -46,6 +47,11 @@ function App() {
     setEventListeners();
   }
 
+  function handleMobileMenuPopupOpen() {
+    setIsMobileMenuPopupOpen(true);
+    setEventListeners();
+  }
+
   function setEventListeners() {
     window.addEventListener('keydown', closeByEsc);
     // overlay.addEventListener('click', closeAllPopups);
@@ -60,10 +66,10 @@ function App() {
     <div className='page'>
       <Switch>
         <Route path='/saved-news'>
-          <SavedNews onClick={handleLoginClick} />
+          <SavedNews onClick={handleLoginClick} mobileMenuClick={handleMobileMenuPopupOpen} menuIsOpen={isMobileMenuPopupOpen} />
         </Route>
         <Route path='/'>
-          <Main onClick={handleLoginClick} />
+          <Main onClick={handleLoginClick} mobileMenuClick={handleMobileMenuPopupOpen} menuIsOpen={isMobileMenuPopupOpen} />
         </Route>
       </Switch>
       <Footer />
