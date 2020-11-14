@@ -8,8 +8,11 @@ import LoginPopup from '../LoginPopup/LoginPopup';
 import CreateUserPopup from '../CreateUserPopup/CreateUserPopup';
 import RegOkPopup from '../RegOkPopup/RegOkPopup';
 import { getToken } from '../../utils/auth';
+import ProtectedRoute from '../ProptectedRoute/ProptectedRoute';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
+  const [currentUser, setCurrentUser] = React.useState({});
   const history = useHistory();
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isCreateUserPopupOpen, setIsCreateUserPopupOpen] = React.useState(false);
@@ -100,12 +103,13 @@ function App() {
   return (
     <div className='page'>
       <Switch>
-        <Route path='/saved-news'>
-          <SavedNews onClick={handleLoginClick} mobileMenuClick={handleMobileMenuPopupOpen} menuIsOpen={isMobileMenuPopupOpen} isLogged={loggedIn} signOut={signOut} loggedName={loggedName} />
-        </Route>
-        <Route path='/'>
-          <Main onClick={handleLoginClick} mobileMenuClick={handleMobileMenuPopupOpen} menuIsOpen={isMobileMenuPopupOpen} isLogged={loggedIn} signOut={signOut} loggedName={loggedName} />
-        </Route>
+        <CurrentUserContext.Provider value={currentUser}>
+          <ProtectedRoute path='/saved-news' loggedIn={loggedIn} component={SavedNews} onClick={handleLoginClick} mobileMenuClick={handleMobileMenuPopupOpen} menuIsOpen={isMobileMenuPopupOpen} isLogged={loggedIn} signOut={signOut} loggedName={loggedName} />
+
+          <Route path='/'>
+            <Main onClick={handleLoginClick} mobileMenuClick={handleMobileMenuPopupOpen} menuIsOpen={isMobileMenuPopupOpen} isLogged={loggedIn} signOut={signOut} loggedName={loggedName} />
+          </Route>
+        </CurrentUserContext.Provider>
       </Switch>
       <Footer />
       <LoginPopup

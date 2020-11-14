@@ -8,7 +8,7 @@ function SavedNews(props) {
   return (
     <main className='saved-news'>
       <Header activeClass='nav__link_active' onClick={props.onClick} isLogged={props.isLogged} menuIsOpen={props.menuIsOpen} mobileMenuClick={props.mobileMenuClick} signOut={props.signOut} loggedName={props.loggedName} />
-      <SavedNewsHeader />
+      <SavedNewsHeader loggedName={props.loggedName} />
       <NewsCardList tooltip='Убрать из сохранённых' />
     </main>
   );
