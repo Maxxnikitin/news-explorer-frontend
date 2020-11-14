@@ -1,0 +1,15 @@
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 550px) {
+  .nav {
+    display: none;
+  }
+  .nav-mobile {
+    display: flex;
+    flex-direction: column;
+  }
+}
+

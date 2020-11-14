@@ -1,0 +1,17 @@
+.card-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background-color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.card-button__img {
+  margin: auto;
+}

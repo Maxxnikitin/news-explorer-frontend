@@ -1,0 +1,36 @@
+.button-close-item {
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  background-image: url(../../../images/popup/cross.svg);
+  background-color: rgba(0, 0, 0, 0);
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  position: relative;
+  top: -82px;
+  right: -82px;
+  align-self: flex-end;
+  transition: opacity .5s;
+}
+
+.button-close-item:hover {
+  opacity: .8;
+}
+
+@media (max-width: 800px) {
+  .button-close-item {
+    display: none;
+  }
+}
+
+@media (max-width: 434px) {
+  .button-close-item {
+    display: block;
+    top: -60px;
+    right: 0;
+    width: 24px;
+    height: 24px;
+  }
+}
