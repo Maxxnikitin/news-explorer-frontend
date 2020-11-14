@@ -10,6 +10,7 @@ function FormInput(props) {
       id={props.name}
       required
       placeholder={props.placeholder}
+      onChange={props.onChange}
     />
   );
 }

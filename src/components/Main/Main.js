@@ -10,7 +10,7 @@ import About from '../About/About';
 function Main(props) {
   return (
     <main className='main'>
-      <Header theme='white' activeClass='nav__link_active-white' onClick={props.onClick} menuIsOpen={props.menuIsOpen} mobileMenuClick={props.mobileMenuClick} />
+      <Header theme='white' activeClass='nav__link_active-white' onClick={props.onClick} menuIsOpen={props.menuIsOpen} mobileMenuClick={props.mobileMenuClick} isLogged={props.isLogged} signOut={props.signOut} loggedName={props.loggedName} />
       <SearchForm />
       <Preloader />
       <NewsCardList page='main' tooltip='Войдите, чтобы сохранять статьи' />

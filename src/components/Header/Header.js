@@ -2,7 +2,6 @@ import React from 'react';
 import './Header.css';
 import NavLinkButton from '../ui/NavLinkButton/NavLinkButton';
 import Navigation from '../Navigation/Navigation';
-import CloseFormButton from '../ui/CloseFormButton/CloseFormButton';
 
 function Header(props) {
   const navLinkClassName = (
@@ -15,7 +14,7 @@ function Header(props) {
     <header className='header'>
       <div className='header__container'>
         <NavLinkButton class={navLinkClassName} to='/' text='News Explorer' />
-        <Navigation theme={props.theme} activeClass={props.activeClass} onClick={props.onClick} isLogged={props.isLogged} />
+        <Navigation theme={props.theme} activeClass={props.activeClass} onClick={props.onClick} isLogged={props.isLogged} name={props.name} signOut={props.signOut} loggedName={props.loggedName} />
         <button className='header__menu-button' type='button' onClick={props.mobileMenuClick}>
           <span className={menuButtonClassName}></span>
         </button>

@@ -9,6 +9,7 @@ function SearchInput() {
       type='text'
       name='keywords'
       placeholder='Введите тему новости'
+      required
     />
   );
 }

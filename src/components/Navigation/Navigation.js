@@ -16,11 +16,13 @@ function Navigation(props) {
   return (
     <nav className={`${(props.place === 'mobile') ? 'nav nav-mobile' : 'nav'}`}>
       <NavLinkButton theme={props.theme} class={navLinkClassName} activeClass={props.activeClass} to='/' text='Главная' />
-      <NavLinkButton theme={props.theme} class={navLinkClassName} activeClass={props.activeClass} to='/saved-news' text='Сохранённые статьи' />
       {(props.isLogged === true) ?
-      <Button theme={props.theme} type='button' text='Максим' onClick={props.onClick}>
-        <img className='button__icon' src={buttonImg} alt='выход.' />
-      </Button> :
+      <>
+        <NavLinkButton theme={props.theme} class={navLinkClassName} activeClass={props.activeClass} to='/saved-news' text='Сохранённые статьи' />
+        <Button theme={props.theme} type='button' text={props.loggedName} onClick={props.signOut}>
+          <img className='button__icon' src={buttonImg} alt='выход.' />
+        </Button>
+      </> :
       <Button theme={props.theme} type='button' text='Авторизоваться' onClick={props.onClick} />}
     </nav>
   )

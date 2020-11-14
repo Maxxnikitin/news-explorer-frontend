@@ -108,6 +108,11 @@
   top: 223px;
 }
 
+.form__input-error_place_search {
+  top: 480px;
+  left: 420px
+}
+
 @media (max-width: 800px) {
   .form__fieldset {
     margin-top: 0;

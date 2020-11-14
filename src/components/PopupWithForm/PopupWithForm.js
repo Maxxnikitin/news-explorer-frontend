@@ -26,11 +26,11 @@ function PopupWithForm(props) {
         ''}
         {(props.place !== 'result') ?
         <p className='form__text'>Или {(props.place === 'login') ?
-        <button className='form__nav-link' type='button' onClick={props.onClickLogin}>Зарегистрироваться</button> :
+        <button className='form__nav-link' type='submit' onClick={props.onClickLogin}>Зарегистрироваться</button> :
         (props.place === 'reg') ?
-        <button className='form__nav-link' type='button' onClick={props.onClickReg}>Войти</button> :
+        <button className='form__nav-link' type='submit' onClick={props.onClickReg}>Войти</button> :
         ''}</p> :
-        <button className='form__nav-link' type='button' onClick={props.onClickReg}>Войти</button>}
+        <button className='form__nav-link' type='submit' onClick={props.onClickReg}>Войти</button>}
       </form>
     </section>
   )

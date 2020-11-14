@@ -1,18 +1,22 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Main from '../Main/Main';
 import SavedNews from '../SavedNews/SavedNews';
 import Footer from '../Footer/Footer';
 import LoginPopup from '../LoginPopup/LoginPopup';
 import CreateUserPopup from '../CreateUserPopup/CreateUserPopup';
 import RegOkPopup from '../RegOkPopup/RegOkPopup';
+import { getToken } from '../../utils/auth';
 
 function App() {
+  const history = useHistory();
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isCreateUserPopupOpen, setIsCreateUserPopupOpen] = React.useState(false);
   const [isRegOkPopupOpen, setIsRegOkPopupOpen] = React.useState(false);
   const [isMobileMenuPopupOpen, setIsMobileMenuPopupOpen] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedName, setLoggedName] = React.useState('');
 
   // const overlay = document.querySelector('.popup__overlay');
 
@@ -52,6 +56,37 @@ function App() {
     setEventListeners();
   }
 
+  function handleLogin() {
+    setLoggedIn(true);
+  }
+
+  function signOut () {
+    localStorage.removeItem('token');
+    setLoggedName('');
+    setLoggedIn(false);
+    history.push('/');
+  }
+
+  function tokenCheck() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      getToken(token)
+        .then((res) => {
+          if (res.data) {
+            handleLogin();
+            setLoggedName(res.data.name);
+          //  history.push('/');
+          } else {
+            localStorage.removeItem('token');
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+  React.useEffect(() => {
+    tokenCheck();
+  });
+
   function setEventListeners() {
     window.addEventListener('keydown', closeByEsc);
     // overlay.addEventListener('click', closeAllPopups);
@@ -66,10 +101,10 @@ function App() {
     <div className='page'>
       <Switch>
         <Route path='/saved-news'>
-          <SavedNews onClick={handleLoginClick} mobileMenuClick={handleMobileMenuPopupOpen} menuIsOpen={isMobileMenuPopupOpen} />
+          <SavedNews onClick={handleLoginClick} mobileMenuClick={handleMobileMenuPopupOpen} menuIsOpen={isMobileMenuPopupOpen} isLogged={loggedIn} signOut={signOut} loggedName={loggedName} />
         </Route>
         <Route path='/'>
-          <Main onClick={handleLoginClick} mobileMenuClick={handleMobileMenuPopupOpen} menuIsOpen={isMobileMenuPopupOpen} />
+          <Main onClick={handleLoginClick} mobileMenuClick={handleMobileMenuPopupOpen} menuIsOpen={isMobileMenuPopupOpen} isLogged={loggedIn} signOut={signOut} loggedName={loggedName} />
         </Route>
       </Switch>
       <Footer />
@@ -77,12 +112,13 @@ function App() {
         isOpen={isLoginPopupOpen}
         onClose={closeAllPopups}
         onClickLogin={handleCreateUserClick}
+        tokenCheck={tokenCheck}
       />
       <CreateUserPopup
         isOpen={isCreateUserPopupOpen}
         onClose={closeAllPopups}
         onClickReg={handleLoginClick}
-        onSubmit={handleRegOkClick}
+        openResPopup={handleRegOkClick}
       />
       <RegOkPopup
         isOpen={isRegOkPopupOpen}
