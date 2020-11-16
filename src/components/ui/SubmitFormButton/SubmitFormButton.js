@@ -3,7 +3,7 @@ import './SubmitFormButton.css';
 
 function SubmitFormButton(props) {
   return (
-    <button className='submit-button' type='button'  onClick={props.onClick}>{props.text}</button>
+    <button className={props.className} type='button' disabled={props.disabled} onClick={props.onClick}>{props.text}</button>
   );
 }
 

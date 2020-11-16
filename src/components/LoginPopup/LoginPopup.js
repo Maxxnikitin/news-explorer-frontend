@@ -1,21 +1,25 @@
 import React from 'react';
 import './LoginPopup.css';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import FormInput from '../ui/FormInput/FormInput';
 import { authorize } from '../../utils/auth';
+import { useFormWithValidation } from '../../utils/Validation';
 
 function LoginPopup(props) {
-//  const history = useHistory();
+  const history = useHistory();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const validate = useFormWithValidation();
 
   function handleEmail(e) {
     setEmail(e.target.value);
+    validate.handleChange(e);
   }
 
   function handlePassword(e) {
     setPassword(e.target.value);
+    validate.handleChange(e);
   }
 
   function handleSubmit(e) {
@@ -25,12 +29,12 @@ function LoginPopup(props) {
     }
     authorize(email, password)
       .then((data) => {
-        if (data.token) {
+        if (data) {
           setEmail('');
           setPassword('');
           props.tokenCheck();
           props.onClose();
-        //  history.push('/');
+          history.push('/');
         }
       })
       .catch((err) => console.log(err));
@@ -38,6 +42,7 @@ function LoginPopup(props) {
 
   return (
     <PopupWithForm
+      btnClassName={validate.isValid ? 'submit-button submit-button_active' : 'submit-button'}
       isOpen={props.isOpen}
       onClose={props.onClose}
       place='login'
@@ -46,14 +51,15 @@ function LoginPopup(props) {
       name='login'
       onClickLogin={props.onClickLogin}
       onSubmit={handleSubmit}
+      disabled={!validate.isValid}
     >
       <label className='form__label'>Email
         <FormInput type='email' name='email' placeholder='Введите почту' onChange={handleEmail} />
-        <span className='form__input-error form__input-error_place_email' id='email-error'></span>
+        <span className='form__input-error form__input-error_place_email' id='email-error'>{validate.errors.email}</span>
       </label>
       <label className='form__label'>Пароль
-        <FormInput type='password' name='password' placeholder='Введите пароль' onChange={handlePassword} />
-        <span className='form__input-error form__input-error_place_password' id='password-error'></span>
+        <FormInput type='password' name='password' placeholder='Введите пароль' onChange={handlePassword} minlength='8' />
+        <span className='form__input-error form__input-error_place_password' id='password-error'>{validate.errors.password}</span>
       </label>
     </PopupWithForm>
   );

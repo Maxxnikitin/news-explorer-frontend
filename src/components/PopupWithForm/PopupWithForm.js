@@ -22,7 +22,7 @@ function PopupWithForm(props) {
           {props.children}
         </fieldset>
         {(props.place !== 'result') ?
-        <SubmitFormButton onClick={props.onSubmit} text={props.buttonText} /> :
+        <SubmitFormButton className={props.btnClassName} onClick={props.onSubmit} text={props.buttonText} /> :
         ''}
         {(props.place !== 'result') ?
         <p className='form__text'>Или {(props.place === 'login') ?

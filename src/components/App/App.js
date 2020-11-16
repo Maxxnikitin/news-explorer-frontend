@@ -10,6 +10,8 @@ import RegOkPopup from '../RegOkPopup/RegOkPopup';
 import { getToken } from '../../utils/auth';
 import ProtectedRoute from '../ProptectedRoute/ProptectedRoute';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { useFormWithValidation } from '../../utils/Validation';
+
 
 function App() {
   const token = localStorage.getItem('token');
@@ -22,6 +24,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(!!token);
   const [loggedName, setLoggedName] = React.useState('');
   const [keyword, setKeyword] = React.useState('');
+  const validate = useFormWithValidation();
 
   // const overlay = document.querySelector('.popup__overlay');
 
@@ -30,6 +33,7 @@ function App() {
     setIsCreateUserPopupOpen(false);
     setIsRegOkPopupOpen(false);
     remEventListeners();
+    validate.resetForm();
   }
 
   function closeByEsc(evt) {

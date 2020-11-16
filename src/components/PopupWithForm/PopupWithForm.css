@@ -108,6 +108,10 @@
   top: 223px;
 }
 
+.form__input-error_place_reg-name {
+  top: 303px;
+}
+
 .form__input-error_place_search {
   top: 480px;
   left: 420px

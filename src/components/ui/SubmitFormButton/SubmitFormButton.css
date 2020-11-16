@@ -2,12 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   outline: none;
   border: none;
   box-sizing: border-box;
   border-radius: 100px;
-  background-color: #2F71E5;
+  background-color:#e6e8eb;
   width: 360px;
   height: 64px;
   padding: 0;
@@ -15,15 +14,21 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
-  color: #FFF;
+  color: #b6bcbf;
   align-self: center;
 }
 
-.submit-button:hover {
+.submit-button_active {
+  background: #2f71e5;
+  color: white;
+  cursor: pointer;
+}
+
+.submit-button_active:hover {
   background-color: #347EFF;
 }
 
-.submit-button:active {
+.submit-button_active:active {
   background-color: #2A65CC;
 }
 
