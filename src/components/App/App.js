@@ -12,14 +12,16 @@ import ProtectedRoute from '../ProptectedRoute/ProptectedRoute';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
+  const token = localStorage.getItem('token');
   const [currentUser, setCurrentUser] = React.useState({});
   const history = useHistory();
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
   const [isCreateUserPopupOpen, setIsCreateUserPopupOpen] = React.useState(false);
   const [isRegOkPopupOpen, setIsRegOkPopupOpen] = React.useState(false);
   const [isMobileMenuPopupOpen, setIsMobileMenuPopupOpen] = React.useState(false);
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(!!token);
   const [loggedName, setLoggedName] = React.useState('');
+  const [keyword, setKeyword] = React.useState('');
 
   // const overlay = document.querySelector('.popup__overlay');
 
@@ -75,7 +77,7 @@ function App() {
     if (token) {
       getToken(token)
         .then((res) => {
-          if (res.data) {
+          if (res) {
             handleLogin();
             setLoggedName(res.data.name);
           //  history.push('/');
@@ -88,7 +90,9 @@ function App() {
   }
   React.useEffect(() => {
     tokenCheck();
-  });
+    setKeyword(localStorage.getItem('search'));
+  }, [loggedIn]);
+  console.log(keyword);
 
   function setEventListeners() {
     window.addEventListener('keydown', closeByEsc);
@@ -102,15 +106,32 @@ function App() {
 
   return (
     <div className='page'>
-      <Switch>
-        <CurrentUserContext.Provider value={currentUser}>
-          <ProtectedRoute path='/saved-news' loggedIn={loggedIn} component={SavedNews} onClick={handleLoginClick} mobileMenuClick={handleMobileMenuPopupOpen} menuIsOpen={isMobileMenuPopupOpen} isLogged={loggedIn} signOut={signOut} loggedName={loggedName} />
-
-          <Route path='/'>
-            <Main onClick={handleLoginClick} mobileMenuClick={handleMobileMenuPopupOpen} menuIsOpen={isMobileMenuPopupOpen} isLogged={loggedIn} signOut={signOut} loggedName={loggedName} />
+      <CurrentUserContext.Provider value={currentUser}>
+        <Switch>
+          <ProtectedRoute exact path='/saved-news'
+              loggedIn={loggedIn}
+              component={SavedNews}
+              onClick={handleLoginClick}
+              mobileMenuClick={handleMobileMenuPopupOpen}
+              menuIsOpen={isMobileMenuPopupOpen}
+              isLogged={loggedIn}
+              signOut={signOut}
+              loggedName={loggedName}
+          />
+          <Route exact path='/'>
+            <Main
+              onClick={handleLoginClick}
+              mobileMenuClick={handleMobileMenuPopupOpen}
+              menuIsOpen={isMobileMenuPopupOpen}
+              isLogged={loggedIn}
+              signOut={signOut}
+              loggedName={loggedName}
+              search={keyword}
+              setSearch={setKeyword}
+            />
           </Route>
-        </CurrentUserContext.Provider>
-      </Switch>
+        </Switch>
+      </CurrentUserContext.Provider>
       <Footer />
       <LoginPopup
         isOpen={isLoginPopupOpen}

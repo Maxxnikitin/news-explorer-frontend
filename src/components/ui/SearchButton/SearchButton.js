@@ -1,9 +1,9 @@
 import React from 'react';
 import './SearchButton.css';
 
-function SearchButton() {
+function SearchButton(props) {
   return (
-    <button className='search-button' type='submit'>Искать</button>
+    <button className='search-button' type='submit' onClick={props.onClick}>Искать</button>
   );
 }
 
