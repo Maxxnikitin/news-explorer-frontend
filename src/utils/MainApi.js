@@ -46,7 +46,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'https://maxx.news.students.nomoreparties.space/',
+  baseUrl: 'https://maxx.news.students.nomoreparties.space',
   headers: {
     authorization: `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json'

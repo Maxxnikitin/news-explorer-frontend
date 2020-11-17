@@ -96,7 +96,6 @@ function App() {
     tokenCheck();
     setKeyword(localStorage.getItem('search'));
   }, [loggedIn]);
-  console.log(keyword);
 
   function setEventListeners() {
     window.addEventListener('keydown', closeByEsc);
@@ -129,9 +128,10 @@ function App() {
               menuIsOpen={isMobileMenuPopupOpen}
               isLogged={loggedIn}
               signOut={signOut}
+              loggedIn={loggedIn}
               loggedName={loggedName}
-              search={keyword}
-              setSearch={setKeyword}
+              keyword={keyword}
+              setKeyword={setKeyword}
             />
           </Route>
         </Switch>

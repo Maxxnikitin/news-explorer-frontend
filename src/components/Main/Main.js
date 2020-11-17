@@ -33,15 +33,16 @@ function Main(props) {
   return (
     <main className='main'>
       <Header theme='white' activeClass='nav__link_active-white' onClick={props.onClick} menuIsOpen={props.menuIsOpen} mobileMenuClick={props.mobileMenuClick} isLogged={props.isLogged} signOut={props.signOut} loggedName={props.loggedName} />
-      <SearchForm handleSearch={handleSearch} setSearch={props.setSearch} />
+      <SearchForm handleSearch={handleSearch} setSearch={props.setKeyword} />
       {isLoading ? <Preloader /> : ''}
       {(!Array.isArray(articles)) || articles.length === 0 ? '' :
         <NewsCardList
           page='main'
-          tooltip='Войдите, чтобы сохранять статьи'
+          tooltip={props.loggedIn ? 'Нажмите, чтобы сохранить статью' : 'Войдите, чтобы сохранять статьи'}
           articles={articles}
           setArticles={setArticles}
-          search={props.search}
+          keyword={props.keyword}
+          loggedIn={props.loggedIn}
         />
       }
       {Array.isArray(articles) ? articles.length === 0 ? <NotFoundCard /> : '' : ''}

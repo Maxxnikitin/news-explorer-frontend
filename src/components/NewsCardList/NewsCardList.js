@@ -13,11 +13,13 @@ function NewsCardList(props) {
   };
 
   function getSavedArticles() {
-    api.getAllArticles()
-      .then(res => {
-        props.setSavedArticles(res);
-      })
-      .catch((err) => console.error(err));
+    if (props.loggedIn) {
+      api.getAllArticles()
+        .then(res => {
+          props.setSavedArticles(res);
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   React.useEffect(() => {
@@ -33,17 +35,18 @@ function NewsCardList(props) {
           {
             props.savedArticles.map(item => {
               return (<NewsCard
-                image={item.image}
                 title={item.title}
                 text={item.text}
                 date={item.date}
                 author={item.name}
+                link={item.url}
                 key={Math.random() * 10000000}
                 tooltip={props.tooltip}
                 id={item._id}
-                src={item.url}
+                src={item.image}
                 isSaved={true}
                 tag={item.keyword}
+                page={props.page}
                 setSavedArticles={props.setSavedArticles}
               />);
             })
@@ -51,30 +54,20 @@ function NewsCardList(props) {
         </> :
         <>
           {
-            props.articles !== (undefined || null) ?
-              props.articles.slice(0, countArticle).map(item => {
-                return (<NewsCard
-                  image={item.urlToImage}
-                  title={item.title}
-                  text={item.description}
-                  src={item.url}
-                  source={item.source.name}
-                  key={Math.random() * 10000000}
-                  date={toArticleDate}
-                  keyword={props.search}
-                />);
-              }) :
-              props.articles.slice(0, countArticle).map(item => {
-                return (<NewsCard
-                  image={item.urlToImage}
-                  title={item.title}
-                  text={item.description}
-                  src={item.url}
-                  author={item.source.name}
-                  key={Math.random() * 10000000}
-                  date={toArticleDate}
-                />);
-              })}
+            props.articles.slice(0, countArticle).map(item => {
+              return (<NewsCard
+                src={item.urlToImage}
+                link={item.url}
+                title={item.title}
+                text={item.description}
+                source={item.source.name}
+                key={Math.random() * 10000000}
+                date={toArticleDate}
+                page={props.page}
+                keyword={props.keyword}
+                tooltip={props.tooltip}
+              />);
+            })}
           </>
         }
       </div>

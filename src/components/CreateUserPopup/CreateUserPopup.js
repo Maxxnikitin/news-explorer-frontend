@@ -60,7 +60,7 @@ function CreateUserPopup(props) {
         <span className='form__input-error form__input-error_place_email' id='reg-email-error'>{validate.errors.email}</span>
       </label>
       <label className='form__label'>Пароль
-        <FormInput type='password' name='password' placeholder='Введите пароль' onChange={handlePassword} />
+        <FormInput type='password' name='password' placeholder='Введите пароль' onChange={handlePassword} minLength='8' />
         <span className='form__input-error form__input-error_place_password' id='reg-password-error'>{validate.errors.password}</span>
       </label>
       <label className='form__label'>Имя

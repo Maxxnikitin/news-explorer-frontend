@@ -8,57 +8,64 @@ import iconDel from '../../images/news-card/del-not-active.svg'
 import iconDelHover from '../../images/news-card/del-hover.svg'
 import { api } from '../../utils/MainApi';
 
-function NewsCard(props) {
+function NewsCard({
+  tag, id, title, text, source, image, date, link, setSavedArticles, page, src, tooltip, keyword
+}) {
   const [cardButtonMouseEnter, setCardButtonMouseEmter] = React.useState(false);
-  const [cardButtonImg, setCardButtonImg] = React.useState((props.page === 'main') ? iconAdd : iconDel);
+  const [cardButtonImg, setCardButtonImg] = React.useState((page === 'main') ? iconAdd : iconDel);
+  const [isSave, setIsSave] = React.useState(false);
 
   const tooltipClassList = `${cardButtonMouseEnter ? 'card__tooltip card__tooltip_active' : 'card__tooltip '}`
 
   function handleCardButtonMouseEnter() {
     setCardButtonMouseEmter(true);
-    props.page !== 'main' ? setCardButtonImg(iconDelHover) : cardButtonImg === iconAddMarked ? setCardButtonImg(iconAddMarked) : setCardButtonImg(iconAddHover);
+    page !== 'main' ? setCardButtonImg(iconDelHover) : cardButtonImg === iconAddMarked ? setCardButtonImg(iconAddMarked) : setCardButtonImg(iconAddHover);
   }
 
   function handleCardButtonMouseLeave() {
     setCardButtonMouseEmter(false);
-    props.page !== 'main' ? setCardButtonImg(iconDel) : cardButtonImg === iconAddMarked ? setCardButtonImg(iconAddMarked) : setCardButtonImg(iconAdd);
+    page !== 'main' ? setCardButtonImg(iconDel) : isSave ? setCardButtonImg(iconAddMarked) : setCardButtonImg(iconAdd);
   }
 
   function handleDelete() {
     setCardButtonImg(iconDelHover);
-    api.deleteArticle(props.id)
-      .catch((err) => console.error(err));
-    api.getAllArticles()
-      .then((data) => props.setSavedArticles(data))
+    api.deleteArticle(id)
+      .then((res) => {
+        if (res.ok) {
+          api.getAllArticles()
+        }
+      })
+      .then((data) => setSavedArticles(data))
       .catch((err) => console.error(err));
   };
 
   function handleSave() {
     setCardButtonImg(iconAddMarked)
-    api.saveArticle(props.keyword, props.image, props.date, props.title, props.text, props.source, props.link)
+    api.saveArticle(keyword, title, text, date, source, link, image)
+      .then(() => setIsSave(!isSave))
       .catch(err => console.error(err));
   }
 
   function handleCardButtonClick() {
-    props.page !== 'main' ?
+    page !== 'main' ?
     handleDelete() : handleSave()
   }
 
   return (
     <article className='card'>
-      <a className='card__link' href={props.link}>
-        <img className='card__img' src={props.src} alt='изображение новостной статьи.' />
+      <a className='card__link' href={link} target='_blank' rel='noreferrer'>
+        <img className='card__img' src={src} alt='изображение новостной статьи.' />
         <div className='card__container'>
-          <p className='card__date'>{props.date}</p>
-          <h3 className='card__title'>{props.title}</h3>
-          <p className='card__text'>{props.text}</p>
-          <p className='card__source'>{props.source}</p>
+          <p className='card__date'>{date}</p>
+          <h3 className='card__title'>{title}</h3>
+          <p className='card__text'>{text}</p>
+          <p className='card__source'>{source}</p>
         </div>
       </a>
       <CardButton src={cardButtonImg} alt='добавить в избранное.' onMouseEnter={handleCardButtonMouseEnter} onMouseLeave={handleCardButtonMouseLeave} onClick={handleCardButtonClick} />
-      <div className={tooltipClassList}>{props.tooltip}</div>
-      {(props.page !== 'main') ?
-      <div className='card__teg-name'>{props.tag}</div>
+      <div className={tooltipClassList}>{tooltip}</div>
+      {(page !== 'main') ?
+      <div className='card__teg-name'>{tag}</div>
       : ''}
     </article>
   );
