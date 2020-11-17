@@ -5,7 +5,6 @@ import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import NewsCardList from '../NewsCardList/NewsCardList';
 
 function SavedNews(props) {
-  const [savedArticles, setSavedArticles] = React.useState([]);
 
   return (
     <main className='saved-news'>
@@ -13,8 +12,8 @@ function SavedNews(props) {
       <SavedNewsHeader loggedName={props.loggedName} />
       <NewsCardList
         tooltip='Убрать из сохранённых'
-        savedArticles={savedArticles}
-        setSavedArticles={setSavedArticles}
+        savedArticles={props.savedArticles}
+        setSavedArticles={props.setSavedArticles}
       />
     </main>
   );

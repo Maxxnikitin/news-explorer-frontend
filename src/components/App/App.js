@@ -24,6 +24,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(!!token);
   const [loggedName, setLoggedName] = React.useState('');
   const [keyword, setKeyword] = React.useState('');
+  const [savedArticles, setSavedArticles] = React.useState([]);
   const validate = useFormWithValidation();
 
   // const overlay = document.querySelector('.popup__overlay');
@@ -120,6 +121,8 @@ function App() {
               isLogged={loggedIn}
               signOut={signOut}
               loggedName={loggedName}
+              savedArticles={savedArticles}
+              setSavedArticles={setSavedArticles}
           />
           <Route exact path='/'>
             <Main

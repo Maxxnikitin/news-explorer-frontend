@@ -15,7 +15,7 @@ function NewsCardList(props) {
   function getSavedArticles() {
     if (props.loggedIn) {
       api.getAllArticles()
-        .then(res => {
+        .then((res) => {
           props.setSavedArticles(res);
         })
         .catch((err) => console.error(err));
@@ -71,7 +71,7 @@ function NewsCardList(props) {
           </>
         }
       </div>
-      {((props.page === 'main') && (countArticle < props.articles.length)) ?<CardListButton text='Показать ещё' onClick={handleAddArticles} /> : ''}
+      {((props.page === 'main') && (countArticle < props.articles.length)) ? <CardListButton text='Показать ещё' onClick={handleAddArticles} /> : ''}
     </section>
   );
 }

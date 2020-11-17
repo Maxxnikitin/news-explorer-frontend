@@ -3,7 +3,7 @@ import './CardListButton.css';
 
 function CardListButton(props) {
   return (
-  <button className='card-list-button' type='button'>{props.text}</button>
+  <button onClick={props.onClick} className='card-list-button' type='button'>{props.text}</button>
   );
 }
 

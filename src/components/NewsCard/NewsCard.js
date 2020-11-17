@@ -9,7 +9,7 @@ import iconDelHover from '../../images/news-card/del-hover.svg'
 import { api } from '../../utils/MainApi';
 
 function NewsCard({
-  tag, id, title, text, source, image, date, link, setSavedArticles, page, src, tooltip, keyword
+  id, title, text, source, image, date, link, setSavedArticles, page, src, tooltip, keyword
 }) {
   const [cardButtonMouseEnter, setCardButtonMouseEmter] = React.useState(false);
   const [cardButtonImg, setCardButtonImg] = React.useState((page === 'main') ? iconAdd : iconDel);
@@ -65,7 +65,7 @@ function NewsCard({
       <CardButton src={cardButtonImg} alt='добавить в избранное.' onMouseEnter={handleCardButtonMouseEnter} onMouseLeave={handleCardButtonMouseLeave} onClick={handleCardButtonClick} />
       <div className={tooltipClassList}>{tooltip}</div>
       {(page !== 'main') ?
-      <div className='card__teg-name'>{tag}</div>
+      <div className='card__teg-name'>{keyword}</div>
       : ''}
     </article>
   );

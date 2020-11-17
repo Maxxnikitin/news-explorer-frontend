@@ -26,6 +26,8 @@ class NewsApi {
 
 export const newsApi = new NewsApi({
   baseUrl: 'http://newsapi.org/v2/everything?' +
+  `from=${weekAgo}&` +
+  `to=${dateParse}&` +
   'sortBy=popularity&' +
   'pageSize=100&' +
   'apiKey=9c8b7d2ba0d44b3c8b14c62a5875a129',

@@ -14,10 +14,10 @@ function Main(props) {
 
   const handleSearch = () => {
     setIsLoading(true);
-    newsApi.getAllArticles(props.search)
+    newsApi.getAllArticles(props.keyword)
       .then((data) => {
         localStorage.setItem('articles', JSON.stringify(data.articles));
-        localStorage.setItem('search', props.search);
+        localStorage.setItem('search', props.keyword);
         setArticles(data.articles);
       })
       .catch((err) => console.error(err))
