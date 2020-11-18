@@ -21,6 +21,8 @@ function NewsCard({
   src,
   tooltip,
   keyword,
+  loggedIn,
+  openReg,
 }) {
   const [cardButtonMouseEnter, setCardButtonMouseEmter] = React.useState(false);
   const [cardButtonImg, setCardButtonImg] = React.useState(
@@ -83,7 +85,7 @@ function NewsCard({
   }
 
   function handleCardButtonClick() {
-    page !== "main" ? handleDelete() : handleSave();
+    page !== "main" ? handleDelete() : loggedIn ? handleSave() : openReg();
   }
 
   return (
@@ -107,6 +109,7 @@ function NewsCard({
         onMouseEnter={handleCardButtonMouseEnter}
         onMouseLeave={handleCardButtonMouseLeave}
         onClick={handleCardButtonClick}
+        disabled={loggedIn ? false : true}
       />
       <div className={tooltipClassList}>{tooltip}</div>
       {page !== "main" ? <div className="card__teg-name">{keyword}</div> : ""}

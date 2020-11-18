@@ -1,24 +1,24 @@
-import React from 'react';
-import './Main.css';
-import Header from '../Header/Header';
-import SearchForm from '../SearchForm/SearchForm';
-import Preloader from '../Preloader/Preloader';
-import NotFoundCard from '../NotFoundCard/NotFoundCard';
-import NewsCardList from '../NewsCardList/NewsCardList';
-import About from '../About/About';
-import { newsApi } from '../../utils/NewsApi';
+import React from "react";
+import "./Main.css";
+import Header from "../Header/Header";
+import SearchForm from "../SearchForm/SearchForm";
+import Preloader from "../Preloader/Preloader";
+import NotFoundCard from "../NotFoundCard/NotFoundCard";
+import NewsCardList from "../NewsCardList/NewsCardList";
+import About from "../About/About";
+import { newsApi } from "../../utils/NewsApi";
 
 function Main(props) {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [articles, setArticles] = React.useState([]);
 
   const handleSearch = () => {
     setIsLoading(true);
-    newsApi.getAllArticles(props.keyword)
+    newsApi
+      .getAllArticles(props.keyword)
       .then((data) => {
-        localStorage.setItem('articles', JSON.stringify(data.articles));
-        localStorage.setItem('search', props.keyword);
-        setArticles(data.articles);
+        localStorage.setItem("articles", JSON.stringify(data.articles));
+        localStorage.setItem("search", props.keyword);
+        props.setArticles(data.articles);
       })
       .catch((err) => console.error(err))
       .finally(() => {
@@ -26,26 +26,46 @@ function Main(props) {
       });
   };
 
-  React.useEffect(() => {
-    setArticles(JSON.parse(localStorage.getItem('articles')));
-  }, []);
-
   return (
-    <main className='main'>
-      <Header theme='white' activeClass='nav__link_active-white' onClick={props.onClick} menuIsOpen={props.menuIsOpen} mobileMenuClick={props.mobileMenuClick} isLogged={props.isLogged} signOut={props.signOut} loggedName={props.loggedName} />
+    <main className="main">
+      <Header
+        theme="white"
+        activeClass="nav__link_active-white"
+        onClick={props.onClick}
+        menuIsOpen={props.menuIsOpen}
+        mobileMenuClick={props.mobileMenuClick}
+        isLogged={props.isLogged}
+        signOut={props.signOut}
+        loggedName={props.loggedName}
+      />
       <SearchForm handleSearch={handleSearch} setSearch={props.setKeyword} />
-      {isLoading ? <Preloader /> : ''}
-      {(!Array.isArray(articles)) || articles.length === 0 ? '' :
+      {isLoading ? <Preloader /> : ""}
+      {!Array.isArray(props.articles) || props.articles.length === 0 ? (
+        ""
+      ) : (
         <NewsCardList
-          page='main'
-          tooltip={props.loggedIn ? 'Нажмите, чтобы сохранить статью' : 'Войдите, чтобы сохранять статьи'}
-          articles={articles}
-          setArticles={setArticles}
+          page="main"
+          tooltip={
+            props.loggedIn
+              ? "Нажмите, чтобы сохранить статью"
+              : "Войдите, чтобы сохранять статьи"
+          }
+          articles={props.articles}
+          setArticles={props.setArticles}
           keyword={props.keyword}
           loggedIn={props.loggedIn}
+          openReg={props.openReg}
         />
-      }
-      {Array.isArray(articles) ? articles.length === 0 ? <NotFoundCard /> : '' : ''}
+      )}
+      {Array.isArray(props.articles) ? (
+        props.articles.length === 0 ? (
+          <NotFoundCard />
+        ) : (
+          ""
+        )
+      ) : (
+        ""
+      )}
       <About />
     </main>
   );

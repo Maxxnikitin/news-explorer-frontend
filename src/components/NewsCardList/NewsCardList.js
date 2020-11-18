@@ -73,6 +73,8 @@ function NewsCardList(props) {
                   image={item.urlToImage}
                   keyword={props.keyword}
                   tooltip={props.tooltip}
+                  loggedIn={props.loggedIn}
+                  openReg={props.openReg}
                 />
               );
             })}

@@ -1,8 +1,7 @@
 .search-form {
-  background-image: url('../../images/search/bgd.jpg');
+  background-image: url("../../images/search/bgd.jpg");
   background-size: cover;
   background-position: center;
-  max-width: 1440px;
   height: 576px;
   display: flex;
   flex-direction: column;
@@ -18,7 +17,7 @@
   font-weight: normal;
   font-size: 60px;
   line-height: 64px;
-  color: #FFF;
+  color: #fff;
   margin: 0;
   margin-top: 160px;
   max-width: 545px;
@@ -29,7 +28,7 @@
   font-weight: normal;
   font-size: 18px;
   line-height: 24px;
-  color: #FFF;
+  color: #fff;
   margin: 32px auto 64px;
   max-width: 545px;
 }
@@ -63,7 +62,7 @@
 }
 
 @media (max-width: 540px) {
-  .search-form__title{
+  .search-form__title {
     align-self: start;
     margin-left: 40px;
     width: 100%;
