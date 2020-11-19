@@ -30,10 +30,10 @@ function LoginPopup(props) {
     authorize(email, password)
       .then((data) => {
         if (data) {
-          //  localStorage.setItem("token", data.token);
+          localStorage.setItem("token", data.token);
           setEmail("");
           setPassword("");
-          props.tokenCheck();
+          props.tokenCheck(data.token);
           props.onClose();
           history.push("/");
         }

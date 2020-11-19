@@ -68,6 +68,8 @@ function NewsCard({
   }
 
   function handleSave() {
+    const token = localStorage.getItem("token");
+    console.log(token);
     setCardButtonImg(iconAddMarked);
     console.log({
       keyword: keyword,

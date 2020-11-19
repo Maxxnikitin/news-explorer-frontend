@@ -36,7 +36,6 @@ function Main(props) {
         mobileMenuClick={props.mobileMenuClick}
         isLogged={props.isLogged}
         signOut={props.signOut}
-        loggedName={props.loggedName}
       />
       <SearchForm handleSearch={handleSearch} setSearch={props.setKeyword} />
       {isLoading ? <Preloader /> : ""}
@@ -51,7 +50,6 @@ function Main(props) {
               : "Войдите, чтобы сохранять статьи"
           }
           articles={props.articles}
-          setArticles={props.setArticles}
           keyword={props.keyword}
           loggedIn={props.loggedIn}
           openReg={props.openReg}

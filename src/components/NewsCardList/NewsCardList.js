@@ -2,7 +2,6 @@ import React from "react";
 import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 import CardListButton from "../ui/CardListButton/CardListButton";
-import { api } from "../../utils/MainApi";
 import { toArticleDate } from "../../utils/Date";
 
 function NewsCardList(props) {
@@ -11,21 +10,6 @@ function NewsCardList(props) {
   function handleAddArticles() {
     setCountArticle(countArticle + 3);
   }
-
-  function getSavedArticles() {
-    if (props.loggedIn) {
-      api
-        .getAllArticles()
-        .then((res) => {
-          props.setSavedArticles(res);
-        })
-        .catch((err) => console.error(err));
-    }
-  }
-
-  React.useEffect(() => {
-    getSavedArticles();
-  }, []);
 
   return (
     <section className="news-card-list">

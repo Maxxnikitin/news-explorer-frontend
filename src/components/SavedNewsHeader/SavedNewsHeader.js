@@ -1,17 +1,19 @@
 import React from "react";
 import "./SavedNewsHeader.css";
 import { api } from "../../utils/MainApi";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function SavedNewsHeader(props) {
   const [number, setNumber] = React.useState("0");
   const [uniqueNames, setUniqueNames] = React.useState([]);
+  const user = React.useContext(CurrentUserContext);
 
   const getCountArticles = () => {
     api
       .getAllArticles()
       .then((res) => {
-        setNumber(res.length);
-        const keywordArray = res.map((item) => {
+        setNumber(res.data.length);
+        const keywordArray = res.data.map((item) => {
           return item.keyword;
         });
         setUniqueNames(
@@ -42,7 +44,7 @@ function SavedNewsHeader(props) {
   return (
     <div className="saved-news-header">
       <p className="saved-news-header__about">Сохранённые статьи</p>
-      <h2 className="saved-news-header__title">{`${props.loggedName}, у вас ${number} ${savedText}`}</h2>
+      <h2 className="saved-news-header__title">{`${user.name}, у вас ${number} ${savedText}`}</h2>
       <p className="saved-news-header__keywords">
         По ключевым словам:{" "}
         <span className="saved-news-header__keywords_bold">

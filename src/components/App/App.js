@@ -27,20 +27,33 @@ function App() {
     false
   );
   const [loggedIn, setLoggedIn] = React.useState(!!token);
-  const [loggedName, setLoggedName] = React.useState("");
   const [keyword, setKeyword] = React.useState("");
   const [savedArticles, setSavedArticles] = React.useState([]);
   const validate = useFormWithValidation();
 
   // const overlay = document.querySelector('.popup__overlay');
 
+  React.useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      getUserInfo(token);
+    } else {
+      const local = localStorage.getItem("articles");
+      const localCards = local ? JSON.parse(local) : [];
+      setArticles(localCards);
+    }
+    // eslint-disable-next-line
+  }, [loggedIn]);
+
   function getUserInfo(token) {
-    Promise.all([getToken(token), api.getAllArticles(token)])
+    Promise.all([getToken(token), api.getAllArticles()])
       .then(([user, articles]) => {
-        setCurrentUser(user);
-        const localCards = JSON.parse(localStorage.getItem("articles") || []);
-        setSavedArticles(articles);
-        setArticles(localCards, articles);
+        setCurrentUser(user.data);
+        const localCards = JSON.parse(localStorage.getItem("articles"));
+        setSavedArticles(articles.data);
+        setArticles(localCards, articles.data);
+        setLoggedIn(true);
+        handleLogin();
       })
       .catch((err) => console.log(err));
   }
@@ -88,12 +101,12 @@ function App() {
 
   function signOut() {
     localStorage.removeItem("token");
-    setLoggedName("");
+    setCurrentUser({});
     setLoggedIn(false);
     history.push("/");
   }
 
-  function tokenCheck() {
+  /* function tokenCheck() {
     const token = localStorage.getItem("token");
     if (token) {
       getToken(token)
@@ -115,17 +128,7 @@ function App() {
     tokenCheck();
     setKeyword(localStorage.getItem("search"));
   }, [loggedIn]);
-
-  React.useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      getToken(token);
-    } else {
-      const local = localStorage.getItem("articles");
-      const localCards = local ? JSON.parse(local) : [];
-      setArticles(localCards);
-    }
-  }, []);
+ */
 
   function setEventListeners() {
     window.addEventListener("keydown", closeByEsc);
@@ -151,7 +154,6 @@ function App() {
             menuIsOpen={isMobileMenuPopupOpen}
             isLogged={loggedIn}
             signOut={signOut}
-            loggedName={loggedName}
             savedArticles={savedArticles}
             setSavedArticles={setSavedArticles}
           />
@@ -163,7 +165,6 @@ function App() {
               isLogged={loggedIn}
               signOut={signOut}
               loggedIn={loggedIn}
-              loggedName={loggedName}
               keyword={keyword}
               setKeyword={setKeyword}
               openReg={handleCreateUserClick}
@@ -178,7 +179,7 @@ function App() {
         isOpen={isLoginPopupOpen}
         onClose={closeAllPopups}
         onClickLogin={handleCreateUserClick}
-        tokenCheck={tokenCheck}
+        tokenCheck={getUserInfo}
       />
       <CreateUserPopup
         isOpen={isCreateUserPopupOpen}
