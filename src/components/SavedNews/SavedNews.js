@@ -20,6 +20,7 @@ function SavedNews(props) {
         tooltip="Убрать из сохранённых"
         savedArticles={props.savedArticles}
         setSavedArticles={props.setSavedArticles}
+        loggedIn={props.loggedIn}
       />
     </main>
   );

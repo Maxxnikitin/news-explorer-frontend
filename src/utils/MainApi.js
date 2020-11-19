@@ -45,10 +45,13 @@ class Api {
     });
   }
 
-  deleteArticle(id) {
+  deleteArticle(token, id) {
     return fetch(`${this._baseUrl}/articles/${id}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        authorization: `Bearer ${token}`,
+      },
     }).then((res) => {
       return this._getCallbackWithRes(res);
     });

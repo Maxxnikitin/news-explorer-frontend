@@ -24,12 +24,18 @@ function NewsCard({
   keyword,
   loggedIn,
   openReg,
+  setSaved,
+  card,
 }) {
-  const [cardButtonMouseEnter, setCardButtonMouseEmter] = React.useState(false);
+  const [cardButtonMouseEnter, setCardButtonMouseEnter] = React.useState(false);
   const [cardButtonImg, setCardButtonImg] = React.useState(
     page === "main" ? iconAdd : iconDel
   );
   const [isSave, setIsSave] = React.useState(false);
+  const [cardId, setCardId] = React.useState("");
+  function addCardId(x) {
+    setCardId(x);
+  }
 
   const tooltipClassList = `${
     cardButtonMouseEnter
@@ -38,7 +44,7 @@ function NewsCard({
   }`;
 
   function handleCardButtonMouseEnter() {
-    setCardButtonMouseEmter(true);
+    setCardButtonMouseEnter(true);
     page !== "main"
       ? setCardButtonImg(iconDelHover)
       : cardButtonImg === iconAddMarked
@@ -47,19 +53,19 @@ function NewsCard({
   }
 
   function handleCardButtonMouseLeave() {
-    setCardButtonMouseEmter(false);
+    setCardButtonMouseEnter(false);
     page !== "main"
       ? setCardButtonImg(iconDel)
-      : isSave
+      : cardButtonImg === iconAddMarked
       ? setCardButtonImg(iconAddMarked)
       : setCardButtonImg(iconAdd);
   }
 
-  function handleDelete() {
+  function handleDelete(article) {
     setCardButtonImg(iconDelHover);
-    //console.log(savedArticles);
+    const token = localStorage.getItem("token");
     api
-      .deleteArticle(id)
+      .deleteArticle(token, article._id)
       .then(() => {
         const newCards = savedArticles.filter((c) => c._id !== id);
         setSavedArticles(newCards);
@@ -73,20 +79,43 @@ function NewsCard({
     api
       .saveArticle(token, { keyword, title, text, date, source, link, image })
       .then((newCard) => {
-        //console.log(newCard.data);
+        addCardId(newCard.data._id);
         setSavedArticles([...savedArticles, newCard.data]);
-        console.log("4 " + savedArticles);
-        setIsSave(!isSave);
+        setSaved((myNews) => {
+          localStorage.setItem(
+            "saved",
+            JSON.stringify([...myNews, newCard.data.title])
+          );
+          return [...myNews, newCard.data.title];
+        });
+        setIsSave(true);
       })
       .catch((err) => console.error(err));
   }
 
+  React.useEffect(() => {
+    const saveArticle = JSON.parse(localStorage.getItem("saved"));
+
+    if (!saveArticle) return;
+    if (saveArticle.find((item) => item === title)) {
+      page !== "main"
+        ? setCardButtonImg(iconDel)
+        : setCardButtonImg(iconAddMarked);
+    }
+  }, []);
+
   function handleCardButtonClick() {
-    page !== "main" ? handleDelete() : loggedIn ? handleSave() : openReg();
+    page !== "main"
+      ? handleDelete(card)
+      : loggedIn
+      ? cardButtonImg === iconAddMarked
+        ? handleDelete(card)
+        : handleSave()
+      : openReg();
   }
 
   return (
-    <article className="card">
+    <article className="card" id={cardId}>
       <a className="card__link" href={link} target="_blank" rel="noreferrer">
         <img
           className="card__img"

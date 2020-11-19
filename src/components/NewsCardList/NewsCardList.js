@@ -11,6 +11,8 @@ function NewsCardList(props) {
     setCountArticle(countArticle + 3);
   }
 
+  const [saved, setSaved] = React.useState([]);
+
   return (
     <section className="news-card-list">
       {props.page === "main" ? (
@@ -39,6 +41,8 @@ function NewsCardList(props) {
                   page={props.page}
                   savedArticles={props.savedArticles}
                   setSavedArticles={props.setSavedArticles}
+                  loggedIn={props.loggedIn}
+                  card={item}
                 />
               );
             })}
@@ -61,6 +65,10 @@ function NewsCardList(props) {
                   tooltip={props.tooltip}
                   loggedIn={props.loggedIn}
                   openReg={props.openReg}
+                  savedArticles={props.savedArticles}
+                  setSavedArticles={props.setSavedArticles}
+                  setSaved={setSaved}
+                  card={item}
                 />
               );
             })}

@@ -32,8 +32,6 @@ function App() {
   const validate = useFormWithValidation();
 
   function changeSetSavedArticles(x) {
-    console.log(x);
-    console.log(savedArticles);
     setSavedArticles(x);
   }
 
@@ -60,7 +58,6 @@ function App() {
         setSavedArticles(articles);
         setArticles(localCards, articles);
         setLoggedIn(true);
-        handleLogin();
       })
       .catch((err) => console.log(err));
   }
@@ -100,10 +97,6 @@ function App() {
   function handleMobileMenuPopupOpen() {
     setIsMobileMenuPopupOpen(true);
     setEventListeners();
-  }
-
-  function handleLogin() {
-    setLoggedIn(true);
   }
 
   function signOut() {
@@ -177,6 +170,8 @@ function App() {
               openReg={handleCreateUserClick}
               setArticles={setArticles}
               articles={articles}
+              savedArticles={savedArticles}
+              setSavedArticles={changeSetSavedArticles}
             />
           </Route>
         </Switch>

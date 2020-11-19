@@ -53,6 +53,8 @@ function Main(props) {
           keyword={props.keyword}
           loggedIn={props.loggedIn}
           openReg={props.openReg}
+          savedArticles={props.savedArticles}
+          setSavedArticles={props.setSavedArticles}
         />
       )}
       {Array.isArray(props.articles) ? (
