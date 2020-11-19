@@ -29,13 +29,15 @@ function NewsCardList(props) {
                   date={item.date}
                   author={item.name}
                   image={item.image}
+                  src={item.image}
                   link={item.url}
                   key={Math.random() * 10000000}
                   tooltip={props.tooltip}
                   id={item._id}
                   isSaved={true}
-                  tag={item.keyword}
+                  keyword={item.keyword}
                   page={props.page}
+                  savedArticles={props.savedArticles}
                   setSavedArticles={props.setSavedArticles}
                 />
               );

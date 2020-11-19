@@ -15,7 +15,7 @@ function SavedNews(props) {
         mobileMenuClick={props.mobileMenuClick}
         signOut={props.signOut}
       />
-      <SavedNewsHeader />
+      <SavedNewsHeader savedArticles={props.savedArticles} />
       <NewsCardList
         tooltip="Убрать из сохранённых"
         savedArticles={props.savedArticles}

@@ -24,10 +24,13 @@ class Api {
     });
   }
 
-  saveArticle(keyword, image, date, title, text, source, link) {
+  saveArticle(token, { keyword, image, date, title, text, source, link }) {
     return fetch(`${this._baseUrl}/articles`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         keyword,
         image,
@@ -53,7 +56,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: "https://maxx.news.students.nomoreparties.space",
+  baseUrl: "http://marinambur.students.nomoreparties.xyz",
   headers: {
     authorization: `Bearer ${localStorage.getItem("token")}`,
     "Content-Type": "application/json",

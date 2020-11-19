@@ -16,6 +16,7 @@ function NewsCard({
   image,
   date,
   link,
+  savedArticles,
   setSavedArticles,
   page,
   src,
@@ -56,33 +57,27 @@ function NewsCard({
 
   function handleDelete() {
     setCardButtonImg(iconDelHover);
+    //console.log(savedArticles);
     api
       .deleteArticle(id)
-      .then((res) => {
-        if (res.ok) {
-          api.getAllArticles();
-        }
+      .then(() => {
+        const newCards = savedArticles.filter((c) => c._id !== id);
+        setSavedArticles(newCards);
       })
-      .then((data) => setSavedArticles(data))
       .catch((err) => console.error(err));
   }
 
   function handleSave() {
-    const token = localStorage.getItem("token");
-    console.log(token);
     setCardButtonImg(iconAddMarked);
-    console.log({
-      keyword: keyword,
-      title: title,
-      text: text,
-      source: source,
-      date: date,
-      link: link,
-      image: image,
-    });
+    const token = localStorage.getItem("token");
     api
-      .saveArticle(keyword, title, text, date, source, link, image)
-      .then(() => setIsSave(!isSave))
+      .saveArticle(token, { keyword, title, text, date, source, link, image })
+      .then((newCard) => {
+        //console.log(newCard.data);
+        setSavedArticles([...savedArticles, newCard.data]);
+        console.log("4 " + savedArticles);
+        setIsSave(!isSave);
+      })
       .catch((err) => console.error(err));
   }
 

@@ -12,8 +12,8 @@ function SavedNewsHeader(props) {
     api
       .getAllArticles()
       .then((res) => {
-        setNumber(res.data.length);
-        const keywordArray = res.data.map((item) => {
+        setNumber(res.length);
+        const keywordArray = res.map((item) => {
           return item.keyword;
         });
         setUniqueNames(
@@ -27,7 +27,7 @@ function SavedNewsHeader(props) {
 
   React.useEffect(() => {
     getCountArticles();
-  }, []);
+  }, [props.savedArticles]);
 
   function declOfNum(num, titles) {
     const cases = [2, 0, 1, 1, 1, 2];
@@ -51,7 +51,11 @@ function SavedNewsHeader(props) {
           {uniqueNames.length === 0
             ? ""
             : `${uniqueNames[0]}, ${uniqueNames[1] ? uniqueNames[1] : ""} и ${
-                uniqueNames.length - 2 || 0
+                uniqueNames.length === 1
+                  ? 0
+                  : uniqueNames.length === 2
+                  ? 0
+                  : uniqueNames.length - 2
               } другим.`}
         </span>
       </p>

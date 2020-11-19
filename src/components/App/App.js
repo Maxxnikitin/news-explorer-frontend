@@ -31,12 +31,19 @@ function App() {
   const [savedArticles, setSavedArticles] = React.useState([]);
   const validate = useFormWithValidation();
 
+  function changeSetSavedArticles(x) {
+    console.log(x);
+    console.log(savedArticles);
+    setSavedArticles(x);
+  }
+
   // const overlay = document.querySelector('.popup__overlay');
 
   React.useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       getUserInfo(token);
+      setKeyword(localStorage.getItem("search"));
     } else {
       const local = localStorage.getItem("articles");
       const localCards = local ? JSON.parse(local) : [];
@@ -50,8 +57,8 @@ function App() {
       .then(([user, articles]) => {
         setCurrentUser(user.data);
         const localCards = JSON.parse(localStorage.getItem("articles"));
-        setSavedArticles(articles.data);
-        setArticles(localCards, articles.data);
+        setSavedArticles(articles);
+        setArticles(localCards, articles);
         setLoggedIn(true);
         handleLogin();
       })
@@ -155,7 +162,7 @@ function App() {
             isLogged={loggedIn}
             signOut={signOut}
             savedArticles={savedArticles}
-            setSavedArticles={setSavedArticles}
+            setSavedArticles={changeSetSavedArticles}
           />
           <Route exact path="/">
             <Main
