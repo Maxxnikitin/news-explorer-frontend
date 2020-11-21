@@ -1,21 +1,85 @@
-import React from 'react';
-import './NewsCardList.css';
-import NewsCard from '../NewsCard/NewsCard';
-import CardListButton from '../ui/CardListButton/CardListButton';
-import img1 from '../../images/news-card/card-1.jpg'
-import img2 from '../../images/news-card/card-2.jpg'
-import img3 from '../../images/news-card/card-3.jpg'
+import React from "react";
+import "./NewsCardList.css";
+import NewsCard from "../NewsCard/NewsCard";
+import CardListButton from "../ui/CardListButton/CardListButton";
+import { toArticleDate } from "../../utils/Date";
 
 function NewsCardList(props) {
+  const [countArticle, setCountArticle] = React.useState(3);
+
+  function handleAddArticles() {
+    setCountArticle(countArticle + 3);
+  }
+
+  const [saved, setSaved] = React.useState([]);
+
   return (
-    <section className='news-card-list'>
-      {(props.page === 'main') ? <h2 className='news-card-list__title'>Результаты поиска</h2> : ''}
-      <div className='news-card-list__container'>
-        <NewsCard src={img1} date='2 августа, 2019' title='Национальное достояние – парки' text='В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.' source='Дзен' tooltip={props.tooltip} page={props.page} />
-        <NewsCard src={img2} date='2 августа, 2019' title='Лесные огоньки: история одной фотографии' text='Фотограф отвлеклась от освещения суровой политической реальности Мексики, чтобы запечатлеть ускользающую красоту одного из местных чудес природы.' source='Афиша' tooltip={props.tooltip} page={props.page} />
-        <NewsCard src={img3} date='2 августа, 2019' title='«Первозданная тайга»: новый фотопроект Игоря Шпиленка' text='Знаменитый фотограф снимает первозданные леса России, чтобы рассказать о необходимости их сохранения. В этот раз он отправился в Двинско-Пинежскую тайгу, где тра-та-та' source='Дзен' tooltip={props.tooltip} page={props.page} />
+    <section className="news-card-list">
+      {props.page === "main" ? (
+        <h2 className="news-card-list__title">Результаты поиска</h2>
+      ) : (
+        ""
+      )}
+      <div className="news-card-list__container">
+        {props.page !== "main" ? (
+          <>
+            {props.savedArticles.map((item) => {
+              return (
+                <NewsCard
+                  title={item.title}
+                  text={item.text}
+                  date={item.date}
+                  author={item.name}
+                  image={item.image}
+                  src={item.image}
+                  link={item.url}
+                  key={Math.random() * 10000000}
+                  tooltip={props.tooltip}
+                  id={item._id}
+                  isSaved={true}
+                  keyword={item.keyword}
+                  page={props.page}
+                  savedArticles={props.savedArticles}
+                  setSavedArticles={props.setSavedArticles}
+                  loggedIn={props.loggedIn}
+                  card={item}
+                />
+              );
+            })}
+          </>
+        ) : (
+          <>
+            {props.articles.slice(0, countArticle).map((item) => {
+              return (
+                <NewsCard
+                  src={item.urlToImage}
+                  link={item.url}
+                  title={item.title}
+                  text={item.description}
+                  source={item.source.name}
+                  key={Math.random() * 10000000}
+                  date={toArticleDate}
+                  page={props.page}
+                  image={item.urlToImage}
+                  keyword={props.keyword}
+                  tooltip={props.tooltip}
+                  loggedIn={props.loggedIn}
+                  openReg={props.openReg}
+                  savedArticles={props.savedArticles}
+                  setSavedArticles={props.setSavedArticles}
+                  setSaved={setSaved}
+                  card={item}
+                />
+              );
+            })}
+          </>
+        )}
       </div>
-      {(props.page === 'main') ? <CardListButton text='Показать ещё' /> : ''}
+      {props.page === "main" && countArticle < props.articles.length ? (
+        <CardListButton text="Показать ещё" onClick={handleAddArticles} />
+      ) : (
+        ""
+      )}
     </section>
   );
 }
